@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "serve": "npx serve -p 3000"
+    "serve": "npx serve -p 3000 dist/"
   },
   "dependencies": {
     "react": "^18.2.0",

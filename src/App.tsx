@@ -1,12 +1,8 @@
 import React from "react";
+import Home from "./pages/Home";
+
 function App() {
-  const main = (
-    <main className="contain">
-      hello
-    </main>
-  )
-  console.log(main);
-  return main
+  return <Home />
 }
 
 export default App

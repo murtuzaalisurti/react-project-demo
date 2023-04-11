@@ -1,6 +1,7 @@
 import { SyntheticEvent, useContext, useEffect, useRef, useState } from "react"
 import { TodoContext } from "../context/todoContext"
 import { nanoid } from "nanoid"
+import { Outlet } from "react-router-dom"
 
 interface IFormData {
   id: string,
@@ -50,6 +51,7 @@ const Home = () => {
         {/* <input type="checkbox" id="done" onChange={handleChange} checked={formData.done} /> */}
       </form>
       <button onClick={() => addTodo(formData)} disabled={formData.title === "" || formData.desc === ""}>Add todo</button>
+      <Outlet />
     </div>
   )
 }

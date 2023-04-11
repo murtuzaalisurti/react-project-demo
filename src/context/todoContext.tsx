@@ -27,7 +27,7 @@ const initialContext: ITodoContext = {
     addTodo: (todo: ITodo) => {}
 }
 
-const setContext = () => {
+const getContext = () => {
     const [todos, setTodos] = useState<ITodo[]>(initialContext.todos);
 
     const addTodo = (todo: ITodo) => {
@@ -46,7 +46,7 @@ const setContext = () => {
 export const TodoContext = createContext(initialContext)
 
 export const TodoContextProvider = ({ children }: ITodoContextProviderProps) => {
-    const todoItems = setContext()
+    const todoItems = getContext()
     return (
         <TodoContext.Provider value={todoItems}>
             {children}

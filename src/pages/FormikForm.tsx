@@ -1,4 +1,5 @@
 import { Field, Form, Formik, FormikHelpers, FormikProps } from "formik";
+import * as Yup from "yup"
 
 interface IFormValues {
     name: string,
@@ -44,17 +45,30 @@ const FormikForm = () => {
     }
 
     return (
-        <Formik initialValues={initialValues} onSubmit={async (values, actions) => {
-            // console.log(actions);
-            try {
-                await apiCall("/abc", values)
-                actions.setSubmitting(false)
-                console.log(values);
-            } catch (error) {
-                console.log(error);
-                actions.setSubmitting(false)
-            }
-        }}>
+        <Formik
+            initialValues={initialValues}
+            onSubmit={async (values, actions) => {
+                try {
+                    await apiCall("/abc", values)
+                    actions.setSubmitting(false)
+                    actions.resetForm({
+                        values: initialValues
+                    })
+                    console.log(values);
+                } catch (error) {
+                    console.log(error);
+                    actions.setSubmitting(false)
+                    actions.resetForm({
+                        values: initialValues
+                    })
+                }
+            }}
+            validationSchema={Yup.object().shape({
+                name: Yup.string().required("Required"),
+                email: Yup.string().email("Invalid email").required(),
+                password: Yup.string().required().min(8, "It's shorter than 8 characters")
+            })}
+        >
             {({ values, errors, touched, isSubmitting }: FormikProps<IFormValues>) => (
                 <Form noValidate>
                     <Field

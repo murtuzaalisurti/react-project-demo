@@ -4,11 +4,13 @@ import Nested from "../components/Nested";
 import Root from "../pages/Layouts/Root";
 import NestedLevelTwo from "../components/NestedLevelTwo";
 import NotFound from "../pages/NotFound";
+import FormikForm from "../pages/FormikForm";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
             <Route index element={<Home />} />
+            <Route path="formik" element={<FormikForm />} />
             <Route path="nested" element={<Nested />}>
                 <Route path="nestedTwo" element={<NestedLevelTwo />} />
             </Route>

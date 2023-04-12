@@ -10,10 +10,12 @@
     "serve": "npx serve -p 3000 dist/"
   },
   "dependencies": {
+    "formik": "^2.2.9",
     "nanoid": "^4.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

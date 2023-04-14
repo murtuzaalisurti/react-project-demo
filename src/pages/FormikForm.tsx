@@ -87,7 +87,7 @@ const FormikForm = () => {
                 })
             })}
         >
-            {({ errors, touched, isSubmitting, dirty }: FormikProps<IFormValues>) => (
+            {({ isSubmitting, dirty, resetForm }: FormikProps<IFormValues>) => (
                 <Form noValidate>
                     <Field
                         type={"text"}
@@ -145,6 +145,9 @@ const FormikForm = () => {
                         <Field type={"checkbox"} name={"longDescription"} />
                     </label>
                     <button type="submit" disabled={isSubmitting || !dirty}>Submit</button>
+                    <button type="button" onClick={() => resetForm({
+                        values: initialValues
+                    })}>Reset</button>
                 </Form>
             )}
         </Formik>

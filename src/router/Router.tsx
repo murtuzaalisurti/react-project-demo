@@ -6,6 +6,7 @@ import NestedLevelTwo from "../components/NestedLevelTwo";
 import NotFound from "../pages/NotFound";
 import FormikForm from "../pages/FormikForm";
 import ReactHookForm from "../pages/ReactHookForm";
+import RenderProp from "../components/RenderProp";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -13,6 +14,7 @@ const router = createBrowserRouter(
             <Route index element={<Home />} />
             <Route path="formik" element={<FormikForm />} />
             <Route path="rhf" element={<ReactHookForm />} />
+            <Route path="renderProp" element={<RenderProp />} />
             <Route path="nested" element={<Nested />}>
                 <Route path="nestedTwo" element={<NestedLevelTwo />} />
             </Route>

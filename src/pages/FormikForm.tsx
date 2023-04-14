@@ -1,4 +1,4 @@
-import { Field, Form, Formik, FormikHelpers, FormikProps, ErrorMessage, ErrorMessageProps } from "formik";
+import { Field, Form, Formik, FormikHelpers, FormikProps, ErrorMessage } from "formik";
 import { useState } from "react";
 import * as Yup from "yup"
 
@@ -11,6 +11,24 @@ interface IFormValues {
     longDescription: boolean,
     description: string
 }
+
+const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+    gender: Yup.string().oneOf(["male", "female", "other"]),
+    password: Yup.string().required().min(8, "It's shorter than 8 characters"),
+    confirmPassword: Yup.string().oneOf([Yup.ref("password")], "passwords do not match"),
+    longDescription: Yup.boolean(),
+    description: Yup.string().when('longDescription', {
+        is: true,
+        then: (schema) => {
+            return schema.max(50)
+        },
+        otherwise: (schema) => {
+            return schema.max(20)
+        },
+    })
+})
 
 const FormikForm = () => {
 
@@ -69,25 +87,9 @@ const FormikForm = () => {
         <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
-            validationSchema={Yup.object().shape({
-                name: Yup.string().required("Required"),
-                email: Yup.string().email("Invalid email").required("Required"),
-                gender: Yup.string().oneOf(["male", "female", "other"]),
-                password: Yup.string().required().min(8, "It's shorter than 8 characters"),
-                confirmPassword: Yup.string().oneOf([Yup.ref("password")], "passwords do not match"),
-                longDescription: Yup.boolean(),
-                description: Yup.string().when('longDescription', {
-                    is: true,
-                    then: (schema) => {
-                        return schema.max(50)
-                    },
-                    otherwise: (schema) => {
-                        return schema.max(20)
-                    },
-                })
-            })}
+            validationSchema={validationSchema}
         >
-            {({ isSubmitting, dirty, resetForm }: FormikProps<IFormValues>) => (
+            {({ isSubmitting, dirty, resetForm, touched, errors,isValid }: FormikProps<IFormValues>) => (
                 <Form noValidate>
                     <Field
                         type={"text"}
@@ -103,8 +105,10 @@ const FormikForm = () => {
                         placeholder={"Email"}
                         autoComplete={"on"}
                     />
-                    <ErrorMessage name="email" render={theError} />
-                    
+                    <ErrorMessage name="email" >
+                        {theError}
+                    </ErrorMessage>
+
                     <fieldset>
                         <legend>Gender</legend>
                         <label htmlFor="male">Male</label>
@@ -124,7 +128,7 @@ const FormikForm = () => {
                     <ErrorMessage name="password" render={theError} />
                     <label htmlFor="showPassword">
                         Show Password
-                        <input onChange={toggleShowPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
+                        <input onChange={toggleShowPassword} checked={showPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
                     </label>
                     <Field
                         type={"password"}
@@ -144,10 +148,13 @@ const FormikForm = () => {
                         Long Description
                         <Field type={"checkbox"} name={"longDescription"} />
                     </label>
-                    <button type="submit" disabled={isSubmitting || !dirty}>Submit</button>
-                    <button type="button" onClick={() => resetForm({
-                        values: initialValues
-                    })}>Reset</button>
+                    <button type="submit" disabled={isSubmitting || !dirty || !isValid}>Submit</button>
+                    <button type="button" onClick={() => {
+                        setShowPassword(false)
+                        resetForm({
+                            values: initialValues
+                        })
+                    }}>Reset</button>
                 </Form>
             )}
         </Formik>

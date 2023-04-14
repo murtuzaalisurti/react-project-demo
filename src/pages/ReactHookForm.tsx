@@ -65,13 +65,13 @@ const ReactHookForm = () => {
     }
 
     const onSubmit: SubmitHandler<IFormValues> = async (data) => {
-        try {
-            await apiCall("/abc", data)
+        apiCall("/abc", data).then(data => {
             console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-        reset();
+        }).catch(err => {
+            console.log(err)
+        }).finally(() => {
+            reset();
+        })
     }
 
     const DisplayError = ({ name }: { name: keyof IFormValues }) => <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />

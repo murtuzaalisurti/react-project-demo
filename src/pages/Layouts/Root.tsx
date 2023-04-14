@@ -6,6 +6,7 @@ const Root = () => {
             <header>
                 <NavLink to={"/"}>Home</NavLink>
                 <NavLink to={"/formik"}>Formik</NavLink>
+                <NavLink to={"/rhf"}>React Hook Form</NavLink>
                 <NavLink to={"nested"}>Nested</NavLink>
                 <NavLink to={"/nested/nestedTwo"}>Nested Level Two</NavLink>
             </header>

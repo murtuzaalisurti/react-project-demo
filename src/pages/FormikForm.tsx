@@ -6,8 +6,10 @@ interface IFormValues {
     name: string,
     email: string,
     password: string,
+    confirmPassword: string,
     gender: string,
-    longDescription: boolean
+    longDescription: boolean,
+    description: string
 }
 
 const FormikForm = () => {
@@ -22,8 +24,10 @@ const FormikForm = () => {
         name: "",
         email: "",
         password: "",
+        confirmPassword: "",
         gender: "",
-        longDescription: false
+        longDescription: false,
+        description: ""
     }
 
     const apiCall = (route: string, payload: IFormValues): Promise<{
@@ -51,35 +55,24 @@ const FormikForm = () => {
     const onSubmit = async (values: IFormValues, actions: FormikHelpers<IFormValues>) => {
         try {
             await apiCall("/abc", values)
-
+            console.log(values);
         } catch (error) {
             console.log(error);
         }
+        actions.setSubmitting(false)
+        actions.resetForm({
+            values: initialValues
+        })
     }
 
     return (
         <Formik
             initialValues={initialValues}
-            onSubmit={async (values, actions) => {
-                try {
-                    await apiCall("/abc", values)
-                    actions.setSubmitting(false)
-                    actions.resetForm({
-                        values: initialValues
-                    })
-                    console.log(values);
-                } catch (error) {
-                    console.log(error);
-                    actions.setSubmitting(false)
-                    actions.resetForm({
-                        values: initialValues
-                    })
-                }
-            }}
+            onSubmit={onSubmit}
             validationSchema={Yup.object().shape({
                 name: Yup.string().required("Required"),
                 email: Yup.string().email("Invalid email").required("Required"),
-                gender: Yup.string().oneOf(["M", "F", "Other"]),
+                gender: Yup.string().oneOf(["male", "female", "other"]),
                 password: Yup.string().required().min(8, "It's shorter than 8 characters"),
                 confirmPassword: Yup.string().oneOf([Yup.ref("password")], "passwords do not match"),
                 longDescription: Yup.boolean(),
@@ -111,12 +104,16 @@ const FormikForm = () => {
                         autoComplete={"on"}
                     />
                     <ErrorMessage name="email" render={theError} />
-                    <Field
-                        type={"text"}
-                        name={"gender"}
-                        id={"gender"}
-                        placeholder={"Gender"}
-                    />
+                    
+                    <fieldset>
+                        <legend>Gender</legend>
+                        <label htmlFor="male">Male</label>
+                        <Field type="radio" name="gender" id="male" value="male" />
+                        <label htmlFor="female">Female</label>
+                        <Field type="radio" name="gender" id="female" value="female" />
+                        <label htmlFor="other">Other</label>
+                        <Field type="radio" name="gender" id="other" value="other" />
+                    </fieldset>
                     <ErrorMessage name="gender" render={theError} />
                     <Field
                         type={showPassword ? "text" : "password"}
@@ -125,7 +122,10 @@ const FormikForm = () => {
                         placeholder={"Password"}
                     />
                     <ErrorMessage name="password" render={theError} />
-                    <input onChange={toggleShowPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
+                    <label htmlFor="showPassword">
+                        Show Password
+                        <input onChange={toggleShowPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
+                    </label>
                     <Field
                         type={"password"}
                         name={"confirmPassword"}

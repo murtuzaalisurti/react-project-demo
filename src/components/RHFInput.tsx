@@ -1,23 +1,17 @@
-import { Input } from "@mui/material"
-import { Controller, useForm } from "react-hook-form"
+import { TextField } from "@mui/material"
+import { Control, Controller } from "react-hook-form"
+import { IFormValues } from "../pages/ReactHookForm"
 
 interface RHFInputProps {
-    name: string,
-    control: any,
+    name: keyof IFormValues,
+    control: Control<IFormValues>
 }
 
-const RHFInput = ({ name }: any) => {
-    const { control } = useForm({
-        defaultValues: {
-            name: "murtuza"
-        }
-    })
+const RHFInput = ({ name, control }: RHFInputProps) => {
     return (
-        <>
-            <Controller name={name} control={control} render={({ field }) => (
-                <Input {...field} />
-            )}></Controller>
-        </>
+        <Controller name={name} control={control} render={({ field }) => (
+            <TextField {...field} />
+        )}></Controller>
     )
 }
 

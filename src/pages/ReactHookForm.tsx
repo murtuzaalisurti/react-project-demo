@@ -3,8 +3,9 @@ import { ErrorMessage } from "@hookform/error-message"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
 import { useState } from "react"
+import RHFInput from "../components/RHFInput"
 
-interface IFormValues {
+export interface IFormValues {
     name: string,
     email: string,
     password: string,
@@ -34,14 +35,25 @@ const validationSchema = Yup.object().shape({
 
 const ReactHookForm = () => {
 
+    const initialValues: IFormValues = {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        gender: "",
+        longDescription: false,
+        description: ""
+    }
+
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const toggleShowPassword = () => {
         setShowPassword(prev => !prev)
     }
 
-    const { register, formState: { errors, isSubmitting, isDirty }, handleSubmit, reset } = useForm<IFormValues>({
-        resolver: yupResolver(validationSchema)
+    const { register, formState: { errors, isSubmitting, isDirty }, handleSubmit, reset, control } = useForm<IFormValues>({
+        resolver: yupResolver(validationSchema),
+        defaultValues: initialValues
     });
 
     const apiCall = (route: string, payload: IFormValues): Promise<{
@@ -78,7 +90,8 @@ const ReactHookForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" {...register("name", { required: "Required" })} placeholder="Name" />
+            <RHFInput control={control} name={"name"} />
+            {/* <input type="text" {...register("name", { required: "Required" })} placeholder="Name" /> */}
             {errors.name && (<p>{errors.name.message?.toString()}</p>)}
 
             <input type="text" {...register("email", { required: "Required" })} placeholder="Email" />

@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
 import { useState } from "react"
 import RHFInput from "../components/RHFInput"
-import { Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material"
+import { Button, Checkbox, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material"
 
 export interface IFormValues {
     name: string,
@@ -158,8 +158,10 @@ const ReactHookForm = () => {
                     <FormControlLabel {...field} control={<Checkbox id={"longDescription"} />} label="Long Description" />
                 )} />
 
-                <button type="submit" disabled={methods.formState.isSubmitting || !methods.formState.isDirty}>Submit</button>
-                <button onClick={() => methods.reset()}>Reset</button>
+                <Button variant="contained" type="submit" disabled={methods.formState.isSubmitting || !methods.formState.isDirty}>Submit</Button>
+                <Button variant="contained" onClick={() => methods.reset()}>Reset</Button>
+                {/* <button type="submit" disabled={methods.formState.isSubmitting || !methods.formState.isDirty}>Submit</button> */}
+                {/* <button onClick={() => methods.reset()}>Reset</button> */}
             </form>
         </FormProvider>
     )

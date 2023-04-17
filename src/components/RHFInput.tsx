@@ -13,7 +13,7 @@ const RHFInput = ({ name, ...MUITextFieldMethods }: RHFInputProps & TextFieldPro
             control={control}
             render={({ field, formState: { errors } }) => (
                 <TextField
-                    error={!!errors.name}
+                    error={!!errors[`${name}`]}
                     {...MUITextFieldMethods}
                     {...field} />
             )}></Controller>

@@ -1,10 +1,9 @@
 import { TextField } from "@mui/material"
-import { Control, Controller, useFormContext } from "react-hook-form"
+import { Controller, useFormContext } from "react-hook-form"
 import { IFormValues } from "../pages/ReactHookForm"
 
 interface RHFInputProps {
-    name: keyof IFormValues,
-    // control: Control<IFormValues>
+    name: keyof IFormValues
 }
 
 const RHFInput = ({ name }: RHFInputProps) => {

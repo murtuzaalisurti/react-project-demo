@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form"
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
@@ -51,7 +51,7 @@ const ReactHookForm = () => {
         setShowPassword(prev => !prev)
     }
 
-    const { register, formState: { errors, isSubmitting, isDirty }, handleSubmit, reset, control } = useForm<IFormValues>({
+    const methods = useForm<IFormValues>({
         resolver: yupResolver(validationSchema),
         defaultValues: initialValues
     });
@@ -82,55 +82,57 @@ const ReactHookForm = () => {
         }).catch(err => {
             console.log(err)
         }).finally(() => {
-            reset();
+            methods.reset();
         })
     }
 
-    const DisplayError = ({ name }: { name: keyof IFormValues }) => <ErrorMessage errors={errors} name={name} render={({ message }) => <p>{message}</p>} />
+    const DisplayError = ({ name }: { name: keyof IFormValues }) => <ErrorMessage errors={methods.formState.errors} name={name} render={({ message }) => <p>{message}</p>} />
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <RHFInput control={control} name={"name"} />
-            {/* <input type="text" {...register("name", { required: "Required" })} placeholder="Name" /> */}
-            {errors.name && (<p>{errors.name.message?.toString()}</p>)}
+        <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <RHFInput name={"name"} />
+                {/* <input type="text" {...register("name", { required: "Required" })} placeholder="Name" /> */}
+                {methods.formState.errors.name && (<p>{methods.formState.errors.name.message?.toString()}</p>)}
 
-            <input type="text" {...register("email", { required: "Required" })} placeholder="Email" />
-            {errors.email && (<p>{errors.email.message?.toString()}</p>)}
+                <input type="text" {...methods.register("email", { required: "Required" })} placeholder="Email" />
+                {methods.formState.errors.email && (<p>{methods.formState.errors.email.message?.toString()}</p>)}
 
-            {/* <input type="text" {...register("gender")} placeholder="Gender" /> */}
-            <fieldset>
-                <legend>Gender</legend>
-                <label htmlFor="male">Male</label>
-                <input {...register("gender")} type="radio" id="male" value="male" />
-                <label htmlFor="female">Female</label>
-                <input {...register("gender")} type="radio" id="female" value="female" />
-                <label htmlFor="other">Other</label>
-                <input {...register("gender")} type="radio" id="other" value="other" />
-            </fieldset>
-            <DisplayError name="gender" />
+                {/* <input type="text" {...register("gender")} placeholder="Gender" /> */}
+                <fieldset>
+                    <legend>Gender</legend>
+                    <label htmlFor="male">Male</label>
+                    <input {...methods.register("gender")} type="radio" id="male" value="male" />
+                    <label htmlFor="female">Female</label>
+                    <input {...methods.register("gender")} type="radio" id="female" value="female" />
+                    <label htmlFor="other">Other</label>
+                    <input {...methods.register("gender")} type="radio" id="other" value="other" />
+                </fieldset>
+                <DisplayError name="gender" />
 
-            <input type={showPassword ? "text" : "password"} {...register("password", { required: "Required" })} placeholder="Password" />
-            <DisplayError name="password" />
+                <input type={showPassword ? "text" : "password"} {...methods.register("password", { required: "Required" })} placeholder="Password" />
+                <DisplayError name="password" />
 
-            <label htmlFor="">
-                Show Password
-                <input onChange={toggleShowPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
-            </label>
+                <label htmlFor="">
+                    Show Password
+                    <input onChange={toggleShowPassword} type={"checkbox"} name={"showPassword"} id={"showPassword"} />
+                </label>
 
-            <input type="password" {...register("confirmPassword")} placeholder="Confirm Password" />
-            <DisplayError name="confirmPassword" />
+                <input type="password" {...methods.register("confirmPassword")} placeholder="Confirm Password" />
+                <DisplayError name="confirmPassword" />
 
-            <input type="description" {...register("description")} placeholder="Description" />
-            <DisplayError name="description" />
+                <input type="description" {...methods.register("description")} placeholder="Description" />
+                <DisplayError name="description" />
 
-            <label htmlFor="longDescription">
-                Long Description
-                <input type="checkbox" {...register("longDescription")} />
-            </label>
+                <label htmlFor="longDescription">
+                    Long Description
+                    <input type="checkbox" {...methods.register("longDescription")} />
+                </label>
 
-            <button type="submit" disabled={isSubmitting || !isDirty}>Submit</button>
-            <button onClick={() => reset()}>Reset</button>
-        </form>
+                <button type="submit" disabled={methods.formState.isSubmitting || !methods.formState.isDirty}>Submit</button>
+                <button onClick={() => methods.reset()}>Reset</button>
+            </form>
+        </FormProvider>
     )
 }
 

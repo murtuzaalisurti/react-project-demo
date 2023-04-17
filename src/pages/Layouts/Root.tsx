@@ -1,12 +1,13 @@
-import { ThemeProvider } from "@mui/material"
+import { CssBaseline, ThemeProvider } from "@mui/material"
 import { useContext } from "react"
 import { NavLink, Outlet } from "react-router-dom"
 import { ThemeContext } from "../../context/themeContext"
 
-const Root = (props: any) => {
-    const {} = useContext(ThemeContext);
+const Root = () => {
+    const { MUITheme } = useContext(ThemeContext);
     return (
-        <ThemeProvider theme={props.MUITheme}>
+        <ThemeProvider theme={MUITheme}>
+            <CssBaseline />
             <header>
                 <NavLink to={"/"}>Home</NavLink>
                 <NavLink to={"/formik"}>Formik</NavLink>

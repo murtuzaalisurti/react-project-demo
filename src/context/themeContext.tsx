@@ -6,17 +6,19 @@ export type Ttheme = "light" | "dark"
 
 export interface IThemeContext {
     themeMode: Ttheme,
-    setThemeMode: () => void
+    setThemeMode: () => void,
+    MUITheme: Theme
 }
 
 const initialContextValue: IThemeContext = {
     themeMode: "light",
-    setThemeMode: () => { }
+    setThemeMode: () => { },
+    MUITheme: createTheme()
 }
 
 const getContext = () => {
     const [themeMode, setTheme] = useState<Ttheme>(initialContextValue.themeMode)
-    const MUITheme = useMemo(() => createTheme(customThemeObj(themeMode)), [themeMode])
+    const MUITheme = createTheme(customThemeObj(themeMode))
 
     const setThemeMode = () => {
         setTheme((prev: Ttheme) => {

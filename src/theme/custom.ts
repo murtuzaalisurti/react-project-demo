@@ -1,4 +1,4 @@
-import { PaletteMode } from '@mui/material'
+import { PaletteMode, ThemeOptions, darkScrollbar } from '@mui/material'
 import { blue, green, red, yellow } from '@mui/material/colors'
 
 export const customThemeObj = (mode: PaletteMode) => {
@@ -8,23 +8,30 @@ export const customThemeObj = (mode: PaletteMode) => {
     * ? for all variants refer to https://mui.com/material-ui/customization/typography/#variants
     * */
     return {
+        components: {
+            MuiCssBaseline: {
+                styleOverrides: (themeParams: ThemeOptions) => ({
+                    body: themeParams.palette?.mode === "dark" ? darkScrollbar() : null
+                })
+            }
+        },
         palette: {
             mode,
-            // ...(mode === "light" ? {
-            //     primary: {
-            //         main: "#000",
-            //     },
-            //     secondary: {
-            //         main: blue[200]
-            //     },
-            // } : {
-            //     primary: {
-            //         main: red[300]
-            //     },
-            //     secondary: {
-            //         main: green[200]
-            //     }
-            // }),
+            ...(mode === "light" ? {
+                primary: {
+                    main: "#000",
+                },
+                secondary: {
+                    main: blue[200]
+                },
+            } : {
+                primary: {
+                    main: red[300]
+                },
+                secondary: {
+                    main: green[200]
+                }
+            }),
             contrastThreshold: 4.5
         }
     }

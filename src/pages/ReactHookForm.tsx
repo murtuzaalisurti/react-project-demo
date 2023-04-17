@@ -91,7 +91,7 @@ const ReactHookForm = () => {
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>
-                <RHFInput name={"name"} />
+                <RHFInput name={"name"} fullWidth={true} />
                 {/* <input type="text" {...register("name", { required: "Required" })} placeholder="Name" /> */}
                 {methods.formState.errors.name && (<p>{methods.formState.errors.name.message?.toString()}</p>)}
 

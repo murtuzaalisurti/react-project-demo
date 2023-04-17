@@ -1,17 +1,22 @@
-import { TextField } from "@mui/material"
+import { TextField, TextFieldProps } from "@mui/material"
 import { Controller, useFormContext } from "react-hook-form"
-import { IFormValues } from "../pages/ReactHookForm"
 
 interface RHFInputProps {
-    name: keyof IFormValues
+    name: string
 }
 
-const RHFInput = ({ name }: RHFInputProps) => {
+const RHFInput = ({ name, ...MUITextFieldMethods }: RHFInputProps & TextFieldProps) => {
     const { control } = useFormContext()
     return (
-        <Controller name={name} control={control} render={({ field }) => (
-            <TextField {...field} />
-        )}></Controller>
+        <Controller
+            name={name}
+            control={control}
+            render={({ field, formState: { errors } }) => (
+                <TextField
+                    error={!!errors.name}
+                    {...MUITextFieldMethods}
+                    {...field} />
+            )}></Controller>
     )
 }
 

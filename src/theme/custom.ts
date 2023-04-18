@@ -15,6 +15,7 @@ export const customThemeObj = (mode: PaletteMode) => {
                 })
             }
         },
+        // breakpoints
         palette: {
             mode,
             ...(mode === "light" ? {

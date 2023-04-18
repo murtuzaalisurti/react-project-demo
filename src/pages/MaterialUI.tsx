@@ -2,13 +2,15 @@ import { useContext } from 'react'
 import { ThemeContext } from '../context/themeContext'
 import { Box, Button, Container } from '@mui/material'
 import Cards from '../components/Cards'
+import StyledButton from '../components/custom/StyledButton'
+import MediaQuery from '../components/MediaQuery'
 
 const MaterialUI = () => {
     const { themeMode, setThemeMode } = useContext(ThemeContext)
     return (
         <>
             <Container sx={{
-                p: 10
+                p: 8 // 8 * 12
             }}>
                 <Box sx={{
                     mb: 2
@@ -17,12 +19,11 @@ const MaterialUI = () => {
                         setThemeMode()
                     }}>Change Theme {themeMode}
                     </Button>
-                    {/* <StyledButton variant="contained">Styled Button</StyledButton> */}
+                    <StyledButton variant="contained">Styled Button</StyledButton>
+                    <MediaQuery />
                 </Box>
                 <Cards />
             </Container>
-            {/* <div>{themeMode}</div>
-            <Button variant='contained' onClick={() => setThemeMode()}>Change</Button> */}
         </>
     )
 }

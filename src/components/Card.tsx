@@ -17,7 +17,7 @@ const CustomCard = ({ color, imgUrl }: { color: string, imgUrl: string | undefin
                 {imgUrl ? (
                     <CardMedia image={imgUrl} component={"img"} height={291} width={518} alt='' />
                 ) : (<>
-                    <Skeleton height={291} width={518} variant='rectangular' />
+                    <Skeleton height={291} variant='rectangular' />
                 </>
                 )}
 

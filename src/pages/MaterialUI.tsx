@@ -4,6 +4,7 @@ import { Box, Button, Container } from '@mui/material'
 import Cards from '../components/Cards'
 import StyledButton from '../components/custom/StyledButton'
 import MediaQuery from '../components/MediaQuery'
+import CustomTable from '../components/Table'
 
 const MaterialUI = () => {
     const { themeMode, setThemeMode } = useContext(ThemeContext)
@@ -23,6 +24,7 @@ const MaterialUI = () => {
                     <MediaQuery />
                 </Box>
                 <Cards />
+                <CustomTable />
             </Container>
         </>
     )

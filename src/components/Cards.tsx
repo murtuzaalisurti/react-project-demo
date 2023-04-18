@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react'
 const Cards = () => {
     const [imgUrl, setImgUrl] = useState<string | undefined>();
 
+    // https://source.unsplash.com/random/1920x1080/?skyscrapers
     useEffect(() => {
         let fetchingImg;
         (function (): PromiseLike<string> {
             return new Promise((resolve, reject) => {
                 fetchingImg = setTimeout(() => {
-                    resolve("https://source.unsplash.com/random/1920x1080/?skyscrapers")
+                    resolve("https://picsum.photos/seed/picsum/1920/1080")
                 }, 2000)
             })
         })().then((data) => {

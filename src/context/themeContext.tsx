@@ -11,7 +11,7 @@ export interface IThemeContext {
 }
 
 const initialContextValue: IThemeContext = {
-    themeMode: "light",
+    themeMode: "dark",
     setThemeMode: () => { },
     MUITheme: createTheme()
 }

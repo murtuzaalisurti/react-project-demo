@@ -23,7 +23,7 @@ const MaterialUI = () => {
                     <StyledButton variant="contained">Styled Button</StyledButton>
                     <MediaQuery />
                 </Box>
-                <Cards />
+                {/* <Cards /> */}
                 <CustomTable />
             </Container>
         </>

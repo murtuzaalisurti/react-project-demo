@@ -2,7 +2,7 @@ import { Box, Card, Typography, CardHeader, Avatar, CardMedia, CardContent, Skel
 import { AccessTimeFilled } from '@mui/icons-material'
 import Grid2 from '@mui/material/Unstable_Grid2'
 
-const CustomCard = ({ color, imgUrl }: { color: string, imgUrl: string | undefined }) => {
+const CustomCard = ({ imgUrl }: { imgUrl?: string }) => {
     return (
         <Grid2 xs={12} md={6} lg={4}>
             {/* https://mui.com/material-ui/react-card/ */}

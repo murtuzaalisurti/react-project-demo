@@ -39,7 +39,7 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
 
 const CustomTable = () => {
 
-    const [planets, setPlanets] = useState<IPlanets[]>()
+    const [planets, setPlanets] = useState<IPlanets[]>([])
 
     useEffect(() => {
         fetch("https://swapi.dev/api/planets")
@@ -62,10 +62,10 @@ const CustomTable = () => {
                     </StyledRow>
                 </TableHead>
                 <TableBody>
-                    {planets && planets.map((planet) => (
+                    {planets.map((planet, index) => (
                         <StyledRow
                         hover
-                            key={planet.url}
+                            key={`${planet.name}_${index}`}
                         >
                             <StyledTableCell component="th" scope="row">
                                 {planet.name}

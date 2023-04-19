@@ -3,7 +3,7 @@ import CustomCard from './Card'
 import { useEffect, useState } from 'react'
 
 const Cards = () => {
-    const [imgUrl, setImgUrl] = useState<string | undefined>();
+    const [imgUrl, setImgUrl] = useState<string>();
 
     // https://source.unsplash.com/random/1920x1080/?skyscrapers
     useEffect(() => {
@@ -24,7 +24,7 @@ const Cards = () => {
         <Grid2 container spacing={5}>
             {/* https://stackoverflow.com/a/47287319 */}
             {Array.from(Array(6)).map((_, index) => {
-                return <CustomCard imgUrl={imgUrl} color='primary' key={index} />
+                return <CustomCard imgUrl={imgUrl} key={index} />
             })}
         </Grid2>
     )

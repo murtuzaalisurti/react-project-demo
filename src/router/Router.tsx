@@ -8,11 +8,13 @@ import FormikForm from "../pages/FormikForm";
 import ReactHookForm from "../pages/ReactHookForm";
 import RenderProp from "../components/RenderProp";
 import MaterialUI from "../pages/MaterialUI";
+import AxiosImplementation from "../pages/AxiosImplementation";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Root />}>
             <Route index element={<Home />} />
+            <Route path="axios" element={<AxiosImplementation />} />
             <Route path="formik" element={<FormikForm />} />
             <Route path="rhf" element={<ReactHookForm />} />
             <Route path="mui" element={<MaterialUI />} />

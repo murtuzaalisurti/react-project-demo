@@ -19,10 +19,10 @@ interface IPlanets {
     url: string
 }
 
-const StyledRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover
-    },
+const StyledRow = styled(TableRow)(() => ({
+    // '&:nth-of-type(odd)': {
+    //     backgroundColor: theme.palette.action.hover
+    // },
     '&:last-child td, &:last-child th': {
         border: 0
     }
@@ -51,6 +51,7 @@ interface TablePaginationActionsProps {
 const TablePaginationActions = (props: TablePaginationActionsProps) => {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
+    console.log("count " + count);
 
     const handleFirstPageButtonClick = (
         event: React.MouseEvent<HTMLButtonElement>,
@@ -133,23 +134,25 @@ const CustomRow = ({ planets, planet, index }: { planets: IPlanets[], planet: IP
             <StyledRow>
                 <StyledTableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={!isCollapsed} timeout={"auto"} unmountOnExit>
-                        <Typography>
-                            Nested
-                        </Typography>
-                        <Table>
-                            <TableHead>
-                                <StyledRow>
-                                    <TableCell>Films</TableCell>
-                                    <TableCell>Residents</TableCell>
-                                </StyledRow>
-                            </TableHead>
-                            <TableBody>
-                                <StyledRow>
-                                    <StyledTableCell component={"th"} scope='row'>{planet.films}</StyledTableCell>
-                                    <StyledTableCell component={"th"} scope='row'>{planet.residents}</StyledTableCell>
-                                </StyledRow>
-                            </TableBody>
-                        </Table>
+                        <Box sx={{margin: 2}}>
+                            <Typography gutterBottom variant='h5'>
+                                Nested
+                            </Typography>
+                            <Table>
+                                <TableHead>
+                                    <StyledRow>
+                                        <TableCell>Films</TableCell>
+                                        <TableCell>Residents</TableCell>
+                                    </StyledRow>
+                                </TableHead>
+                                <TableBody>
+                                    <StyledRow>
+                                        <StyledTableCell component={"th"} scope='row'>{"Film"}</StyledTableCell>
+                                        <StyledTableCell component={"th"} scope='row'>{"Resident"}</StyledTableCell>
+                                    </StyledRow>
+                                </TableBody>
+                            </Table>
+                        </Box>
                     </Collapse>
                 </StyledTableCell>
             </StyledRow>

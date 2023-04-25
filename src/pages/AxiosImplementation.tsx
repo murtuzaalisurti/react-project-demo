@@ -35,8 +35,6 @@ const AxiosImplementation = () => {
         }).catch(err => console.log(err))
     }
 
-    throw new Error("boom");
-
     return (
         <Container>
             <Stack direction={"column"} spacing={3}>

@@ -9,13 +9,19 @@ import ReactHookForm from "../pages/ReactHookForm";
 import RenderProp from "../components/RenderProp";
 import MaterialUI from "../pages/MaterialUI";
 import { Suspense, lazy } from "react";
-// import AxiosImplementation from "../pages/AxiosImplementation";
+import DisplayError from "../components/DisplayError";
+import { ErrorBoundary } from "react-error-boundary";
 
 const AxiosImplementation = lazy(() => import('../pages/AxiosImplementation'))
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Root />}>
+        // <Route path="/" element={<Root />} ErrorBoundary={DisplayError}>
+        <Route path="/" element={
+            <ErrorBoundary FallbackComponent={(props) => <DisplayError {...props} />}>
+                <Root />
+            </ErrorBoundary>
+        }>
             <Route index element={<Home />} />
             <Route path="axios" element={
                 <Suspense fallback={<>{"loading"}</>}>

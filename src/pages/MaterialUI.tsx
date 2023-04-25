@@ -8,6 +8,7 @@ import CustomTable from '../components/Table'
 
 const MaterialUI = () => {
     const { themeMode, setThemeMode } = useContext(ThemeContext)
+    throw new Error("boom 2");
     return (
         <>
             <Container sx={{

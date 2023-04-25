@@ -1,6 +1,6 @@
 import { CssBaseline, Link, ThemeProvider } from "@mui/material"
 import { useContext } from "react"
-import { NavLink, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { ThemeContext } from "../../context/themeContext"
 
 const Root = () => {

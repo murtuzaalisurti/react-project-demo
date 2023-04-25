@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Paper, Stack, Typography } from "@mui/material";
 import { AxiosResponse } from "axios"
 import { useState } from "react";
 import { addPost, getAllPosts } from "../api/handlers";
@@ -22,39 +22,50 @@ const AxiosImplementation = () => {
                 userId: 10
             })
         }).then(data => {
-            console.log(data.request);
-            setResponse(data)
-        })
+            const bodyObject = JSON.parse(data.data.body)
+            setResponse({
+                ...data,
+                ...({
+                    data: {
+                        ...data.data,
+                        body: bodyObject
+                    }
+                })
+            })
+        }).catch(err => console.log(err))
     }
 
     return (
         <Container>
-            <Typography variant="h4">
-                Axios Implementation
-            </Typography>
-            <Box>
-                <Button onClick={handleGetPosts} variant="contained">GET /posts</Button>
-                <Button onClick={handleAddPost} variant="contained">Add Post</Button>
-            </Box>
-            <Paper sx={{ p: 4, maxWidth: "50rem", overflowX: "scroll" }}>
-                <Box sx={{ mt: 3 }}>
-                    <Typography sx={{
-                        mb: 2
-                    }} variant="h5">Response Headers</Typography>
-                    <Typography component={"pre"} fontFamily={'monospace'}>
-                        {JSON.stringify(response?.headers, undefined, 4)}
-                    </Typography>
-                </Box>
+            <Stack direction={"column"} spacing={3}>
+                <Typography variant="h4">
+                    Axios Implementation
+                </Typography>
+                <Stack spacing={2} direction={"row"}>
+                    <Button onClick={handleGetPosts} variant="contained">GET /posts</Button>
+                    <Button onClick={handleAddPost} variant="contained">Add Post</Button>
+                </Stack>
+                <Paper sx={{ p: 4, maxWidth: "50rem", overflowX: "scroll" }}>
+                    <Box sx={{ mt: 3 }}>
+                        <Typography sx={{
+                            mb: 2
+                        }} variant="h5">Response Headers</Typography>
+                        <Typography component={"pre"} fontFamily={'monospace'}>
+                            {JSON.stringify(response?.headers, undefined, 4)}
+                        </Typography>
+                    </Box>
 
-                <Box sx={{ mt: 3 }}>
-                    <Typography sx={{
-                        mb: 2
-                    }} variant="h5">Data</Typography>
-                    <Typography component={"pre"} fontFamily={'monospace'}>
-                        {JSON.stringify(response?.data, undefined, 4)}
-                    </Typography>
-                </Box>
-            </Paper>
+                    <Box sx={{ mt: 3 }}>
+                        <Typography sx={{
+                            mb: 2
+                        }} variant="h5">Data</Typography>
+                        <Typography component={"pre"} fontFamily={'monospace'}>
+                            {/* {typeof response?.data} */}
+                            {JSON.stringify(response?.data, undefined, 4)}
+                        </Typography>
+                    </Box>
+                </Paper>
+            </Stack>
         </Container>
     )
 }

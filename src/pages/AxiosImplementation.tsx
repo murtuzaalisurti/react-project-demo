@@ -21,13 +21,13 @@ const AxiosImplementation = () => {
                 body: 'bars',
                 userId: 10
             })
-        }).then(data => {
-            const bodyObject = JSON.parse(data.data.body)
+        }).then(res => {
+            const bodyObject = JSON.parse(res.data.body)
             setResponse({
-                ...data,
+                ...res,
                 ...({
                     data: {
-                        ...data.data,
+                        ...res.data,
                         body: bodyObject
                     }
                 })
@@ -60,7 +60,6 @@ const AxiosImplementation = () => {
                             mb: 2
                         }} variant="h5">Data</Typography>
                         <Typography component={"pre"} fontFamily={'monospace'}>
-                            {/* {typeof response?.data} */}
                             {JSON.stringify(response?.data, undefined, 4)}
                         </Typography>
                     </Box>

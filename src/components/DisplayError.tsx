@@ -8,6 +8,7 @@ const DisplayError = ({ error }: FallbackProps) => {
     return (
         <>
             <Typography>{error.message}</Typography>
+            <Typography>Cause:- {error.cause}</Typography>
             <Link href='/'>home</Link>
         </>
     )

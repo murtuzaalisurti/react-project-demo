@@ -1,8 +1,7 @@
 import { useStore } from "../../store/zustandStore"
 
 const useTodoStore = () => {
-    const todoStore = useStore()
-    return todoStore
+    return useStore()
 }
 
 export default useTodoStore

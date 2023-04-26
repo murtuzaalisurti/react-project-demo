@@ -12,7 +12,7 @@ const UsingZustand = () => {
 
     return (
         <>
-            {todos.constructor === Array && todos.map((todo) => {
+            {todos.map((todo) => {
                 return (
                     <Typography key={todo.id} component={"pre"}>{JSON.stringify(todo, null, 4)}</Typography>
                 )

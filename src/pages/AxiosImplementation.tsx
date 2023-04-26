@@ -11,7 +11,7 @@ const AxiosImplementation = () => {
             _limit: 5
         })).then(data => {
             setResponse(data)
-        })
+        }).catch(err => console.log(err))
     }
 
     const handleAddPost = () => {

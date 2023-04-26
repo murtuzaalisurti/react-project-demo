@@ -11,6 +11,7 @@ import MaterialUI from "../pages/MaterialUI";
 import { Suspense, lazy } from "react";
 import DisplayError from "../components/DisplayError";
 import { ErrorBoundary } from "react-error-boundary";
+import UsingZustand from "../pages/UsingZustand";
 
 const AxiosImplementation = lazy(() => import('../pages/AxiosImplementation'))
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
             <Route path="formik" element={<FormikForm />} />
             <Route path="rhf" element={<ReactHookForm />} />
             <Route path="mui" element={<MaterialUI />} />
+            <Route path="zustand" element={<UsingZustand />} />
             <Route path="renderProp" element={<RenderProp />} />
             <Route path="nested" element={<Nested />}>
                 <Route path="nestedTwo" element={<NestedLevelTwo />} />

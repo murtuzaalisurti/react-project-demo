@@ -8,9 +8,10 @@ const Root = () => {
     return (
         <ThemeProvider theme={MUITheme}>
             <CssBaseline />
-            <header>
-                <Link href="/">Home</Link>
-                <Link href="/axios">Axios</Link>
+            <header style={{maxWidth: "fit-content"}}>
+                <Link href={"/"}>Home</Link>
+                <Link href={"/axios"}>Axios</Link>
+                <Link href={"/zustand"}>Zustand</Link>
                 <Link href={"/formik"}>Formik</Link>
                 <Link href={"/rhf"}>React Hook Form</Link>
                 <Link href={"/mui"}>MUI</Link>

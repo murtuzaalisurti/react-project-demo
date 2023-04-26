@@ -26,7 +26,7 @@ const getContext = () => {
         });
     }
 
-    return { themeMode, setThemeMode, MUITheme }
+    return useMemo(() => ({ themeMode, setThemeMode, MUITheme }), [themeMode, MUITheme])
 }
 
 export const ThemeContext = createContext(initialContextValue)

@@ -2,14 +2,14 @@ import { nanoid } from "nanoid";
 import { create } from "zustand";
 
 interface ITodo {
-    id: string
+    id: string,
     title: string,
     desc: string,
     done: boolean
 }
 
 interface ITodoActions {
-    addTodo: (todo: ITodo) => void
+    addTodo: (todo: ITodo) => void,
     removeTodo: (id: string) => void,
     getTodo: (id: string) => ITodo
 }
@@ -23,7 +23,7 @@ export const useStore = create<ITodoStore>((set, get) => ({
         id: nanoid(3),
         title: "Todo1",
         desc: "Desc",
-        done: false,
+        done: false
     }],
     addTodo: (todo) => set(state => ({
         todos: [

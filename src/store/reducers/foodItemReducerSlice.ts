@@ -1,19 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface IFoodItems {
+    items: {
+        id: number,
+        item: string
+    }[]
+}
+
+const initialState: IFoodItems = {
+    items: [
+        {
+            id: 1,
+            item: "food item 1"
+        },
+        {
+            id: 2,
+            item: "food item 2"
+        }
+    ]
+}
+
 const foodItemReducerSlice = createSlice({
     name: "food",
-    initialState: {
-        items: [
-            {
-                id: 1,
-                item: "food item 1"
-            },
-            {
-                id: 2,
-                item: "food item 2"
-            }
-        ]
-    },
+    initialState: initialState,
     reducers: {
         add: (state) => {
             state.items.push({

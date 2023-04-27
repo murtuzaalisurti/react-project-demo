@@ -11,6 +11,7 @@ const Root = () => {
             <header>
                 <Link href="/">Home</Link>
                 <Link href="/axios">Axios</Link>
+                <Link href="/rtk">Redux Toolkit</Link>
                 <Link href={"/formik"}>Formik</Link>
                 <Link href={"/rhf"}>React Hook Form</Link>
                 <Link href={"/mui"}>MUI</Link>

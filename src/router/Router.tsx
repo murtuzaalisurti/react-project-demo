@@ -11,6 +11,7 @@ import MaterialUI from "../pages/MaterialUI";
 import { Suspense, lazy } from "react";
 import DisplayError from "../components/DisplayError";
 import { ErrorBoundary } from "react-error-boundary";
+import FoodItemsRedux from "../pages/FoodItemsRedux";
 
 const AxiosImplementation = lazy(() => import('../pages/AxiosImplementation'))
 
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
                     <AxiosImplementation />
                 </Suspense>
             } />
+            <Route path="rtk" element={<FoodItemsRedux />} />
             <Route path="formik" element={<FormikForm />} />
             <Route path="rhf" element={<ReactHookForm />} />
             <Route path="mui" element={<MaterialUI />} />

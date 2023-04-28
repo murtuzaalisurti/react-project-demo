@@ -12,6 +12,7 @@ import { Suspense, lazy } from "react";
 import DisplayError from "../components/DisplayError";
 import { ErrorBoundary } from "react-error-boundary";
 import FoodItemsRedux from "../pages/FoodItemsRedux";
+import UsersRedux from "../pages/UsersRedux";
 
 const AxiosImplementation = lazy(() => import('../pages/AxiosImplementation'))
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
                 </Suspense>
             } />
             <Route path="rtk" element={<FoodItemsRedux />} />
+            <Route path="rtkAsync" element={<UsersRedux />} />
             <Route path="formik" element={<FormikForm />} />
             <Route path="rhf" element={<ReactHookForm />} />
             <Route path="mui" element={<MaterialUI />} />
